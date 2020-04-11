@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+
+{% block title%}Movie List{%endblock%}
+
+{% block content %}
+<div><table width="100%"><tr><td><b>Total Records:</b>{{ total_records }}</td><td align="right"><a href="{% url 'movie_add' %}"><input type="button" class="btn-primary btn-lg" value="Add Movie"></a></td></div>
+{% if movie_data %}
+<table border="1" width="100%">
+    <tr>
+        <th>Movie Name</th>
+        <th>Genre</th>
+        <th>Director</th>
+        <th>Actor</th>
+        <th>writer</th>
+        <th>Plot</th>
+        <th>Poster</th>
+        <th>Action</th>
+    </tr>
+{% for movie in movie_data %}
+<tr>
+    <td><a target="_blank" href="https://www.imdb.com/title/{{movie.imdb_id}}">{{movie.title}}</a></td>
+    <td>{{movie.genre}}</td>
+    <td>{{movie.director}}</td>
+    <td>{{movie.actor}}</td>
+    <td>{{movie.writer}}</td>
+    <td>{{movie.plot}}</td>
+    <td><img width="300px;" height="200px;" src={{movie.poster}}></td>
+    <td><a href="{% url 'movie_edit' movie.id %}"><input type="button" class="btn-danger " value="Edit"></a>
+    </td>
+</tr>
+{% endfor %}
+{% endif %}
+</table>
+{% if movie_data.has_other_pages %}
+<div align="right">
+  <ul  class="pagination">
+    {% if movie_data.has_previous %}
+      <li><a href="?page={{ movie_data.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in movie_data.paginator.page_range %}
+      {% if users.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if movie_data.has_next %}
+      <li><a href="?page={{ movie_data.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title  %}Movie Edit{% endblock %}
+
+
+
+{% block content %}
+<form method="post" >
+{% csrf_token %}
+<div  align="center"><b>Edit Movie:{{movie_data.title}}</b></div>
+<br>
+<table   width="60%" align="center">
+    <tr>
+        <td><b>Genre:</b></td><td><textarea rows="4" style="width:80%;" name="genre">{{movie_data.genre}}</textarea></td>
+    <tr>
+        <td><b>Director:</b></td><td><textarea rows="4" style="width:80%;" name="director">{{movie_data.director}}</textarea></td>
+    </tr>
+    <tr>
+        <td><b>Actor:</b></td>
+        <td><textarea rows="4" style="width:80%;" name="actor">{{movie_data.actor}}</textarea></td>
+    </tr>
+    <tr>
+        <td><b>Writor:</b></td>
+        <td><textarea rows="4" style="width:80%;" name="writer">{{movie_data.writer}}"</textarea></td>
+    </tr>
+    <tr>
+        <td><b>Plot:</b></td>
+        <td><textarea rows="4" style="width:80%;" name="plot">{{movie_data.plot}}</textarea>
+            <input type="hidden" name="edit_id" value="{{movie_data.id}}"></td>
+    </tr>
+    <tr>
+        <td align="center" colspan="2"><input type="submit" class="btn-success btn-lg" value="Update"></td>
+    </tr>
+</table>
+</form>
+{% endblock %}
+
+
+
+
+

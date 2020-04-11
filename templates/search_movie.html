@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title  %}Movie Edit{% endblock%}
+
+{%block content %}
+
+{% if movie_data %}
+<table width="70%" align="center" border="1">
+<tr><th>Movie Name</th><th>Year</th><th>Poster</th></tr>
+{% for movie in movie_data %}
+<tr>
+    <td><a target="_blank" href="https://www.imdb.com/title/{{movie.imdbID}}">{{movie.Title}}</a></td><td>{{movie.Year}}</td><td>{{movie.writer}}</td><td><img width="300px;" height="200px;" src={{movie.Poster}}></td>
+</tr>
+{% endfor %}
+{% endif %}
+</table>
+{% endblock%}
+
+
+
